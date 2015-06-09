@@ -2,7 +2,7 @@ FROM alpine:3.1
 MAINTAINER Jose Monreal <jmonreal@gmail.com>
 
 RUN apk -U upgrade \
-    && apk add make wget go git gcc musl-dev openssl-dev bash libgcc \
+    && apk add make wget go git gcc musl-dev openssl-dev bash libgcc haproxy \
     && export GOPATH=/go \
     && go get -u -v github.com/hashicorp/consul-template \
     && cd /go/src/github.com/hashicorp/consul-template \
@@ -15,7 +15,7 @@ RUN apk -U upgrade \
     && rm -rf /var/cache/apk/* \
     && mkdir -p /etc/consul-template.d
 
-VOLUME ["/etc/consul-template.d"]
+#VOLUME ["/etc/consul-template.d"]
 
 ENTRYPOINT ["/bin/consul-template"]
 
